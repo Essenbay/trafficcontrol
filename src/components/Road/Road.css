@@ -1,0 +1,92 @@
+.road div{
+    position: absolute;
+    background-color: rgb(123, 118, 118);
+}
+
+.road-horizontal{
+    position: static;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+
+    height: 50vh;
+    width: 100vw;
+    display: block;
+}
+
+.road-upper{
+    right: 0;
+    width: 50%;
+    height: 50%;
+}
+
+.road-upper div{
+    height: 50%;
+    right: 0;
+    width: 100%;
+}
+.road-horizontal .lane-1{
+    border: 1px solid blue;
+
+}
+.road-horizontal .lane-2{
+    border: 1px solid red;
+
+    bottom: 0;
+}
+
+.road-down{
+    bottom: 0;
+    width: 50%;
+    height: 50%;
+}
+
+.road-down div{
+    height: 50%;
+    left: 0;
+    width: 100%;
+}
+
+.road-vertical{
+    position: static;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+
+    height: 100vh;
+    width: 80vh;
+}
+
+.road-vertical .lane-group{
+    width: 50%;
+    height: 25%;
+}
+
+.road-left{
+    width: 50%;
+    height: 25%;
+
+}
+
+.road-right{
+    width: 50%;
+    height: 25%;
+    right: 0;
+    bottom: 0;
+}
+
+
+.road-vertical .lane-1{
+    border: 1px solid blue;
+    width: 50%;
+    height: 100%;
+}
+
+.road-vertical .lane-2{
+    border: 1px solid red;
+    right: 0;
+    width: 50%;
+    height: 100%;
+}
