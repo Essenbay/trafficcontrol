@@ -17,7 +17,7 @@
 
 .road-upper{
     right: 0;
-    width: 50%;
+    width: 30%;
     height: 50%;
 }
 
@@ -26,19 +26,14 @@
     right: 0;
     width: 100%;
 }
-.road-horizontal .lane-1{
-    border: 1px solid blue;
 
-}
 .road-horizontal .lane-2{
-    border: 1px solid red;
-
     bottom: 0;
 }
 
 .road-down{
     bottom: 0;
-    width: 50%;
+    width: 30%;
     height: 50%;
 }
 
@@ -57,6 +52,7 @@
 
     height: 100vh;
     width: 80vh;
+
 }
 
 .road-vertical .lane-group{
@@ -79,14 +75,27 @@
 
 
 .road-vertical .lane-1{
-    border: 1px solid blue;
     width: 50%;
     height: 100%;
 }
 
 .road-vertical .lane-2{
-    border: 1px solid red;
     right: 0;
     width: 50%;
     height: 100%;
+}
+
+.lane{
+    display: flex;
+    position: static;
+    border: 1px solid blue;
+    padding: 0;
+    margin: 0;
+}
+
+.car-item{
+    width: 1em;
+    height: 100%;
+    border: 10px solid white;
+    background-color: white;
 }

@@ -1,0 +1,6 @@
+
+
+.car img{
+    object-fit: cover;
+    transform: rotate(90deg);
+}
