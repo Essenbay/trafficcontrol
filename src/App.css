@@ -7,3 +7,14 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.start{
+  position: absolute;
+  top: 90px;
+  left: 150px;
+  color: #fff;
+  background-color: rgb(18, 13, 13);
+  width: 10%;
+  padding: 1em;
+  font-size: 25px;
+}

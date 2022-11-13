@@ -1,45 +1,33 @@
 import './Road.css'
 import React, { useState } from 'react'
 import Car from '../CarPlace/Car';
-import CarLeft from '../CarPlace/CarUpper';
+import TrafficLight from '../TrafficLight/TrafficLight';
 
-function Road(){
-    const [cars, setCars] = useState([]);
-    const [upperCars, setUpperCars] = useState([]);
-    const [downCars, setDownCars] = useState([]);
-    const [leftCars, setLeftCars] = useState([]);
-    const [rightCars, setRightCars] = useState([]);
-    const addCar = (location) => {
-        const newCar = {
-            id: Math.random().toString(36).substr(2,9),
-            location: location
+function Road({addCar, upperCars, downCars, leftCars, rightCars, trafficState}){
+    let upperTl, downTl, leftTl, rightTl;
+    const setTrafficColor = () =>{
+        console.log("Traffic state: " + trafficState);
+        if(trafficState == false){
+            return 'black';
         }
-        switch(location){
-            case "horizontal-upper": 
-                if(upperCars.length < 8){
-                    setUpperCars([...upperCars, newCar]); 
-                } else{console.log(`No place in ${location}`)}
-                break;
-            case "horizontal-down": 
-                if(downCars.length < 8){
-                    setDownCars([...downCars, newCar]);
-                } else{console.log(`No place in ${location}`)}
-                break;
-            case "vertical-left": 
-                if(leftCars.length < 4){
-                    setLeftCars([...leftCars, newCar]);
-                } else{console.log(`No place in ${location}`)}
-                break;
-            case "vertical-right": 
-                if(rightCars.length < 4){
-                    setRightCars([...rightCars, newCar]); break;
-                } else{console.log(`No place in ${location}`)}
-                break;
-            default: console.log("Couldn't find location")
+        else if(trafficState == true){
+            if(upperCars.length + downCars.length > leftCars.length + rightCars.length ){
+                upperTl = 'green';
+                downTl = 'green';
+                leftTl = 'red';
+                rightTl = 'red';
+                console.log("Green on upper and down traffic lights!")
+            }
+            else{
+                upperTl = 'red';
+                downTl = 'red';
+                leftTl = 'green';
+                rightTl = 'green';
+                console.log("Green on left and right traffic lights!")
+            }
         }
-        console.log(`Added car in ${location}`)
     }
-
+    setTrafficColor();
     return (
         <div className="road">
             <div className="road-horizontal">
@@ -57,7 +45,7 @@ function Road(){
                                 }
                             })}
                         </div>
-                        <div className="traffic-light">Traffic Light</div>
+                        <TrafficLight location={"horizontal-upper"} color={upperTl}/>
                         <div className="lane-2 lane" onClick={() => {addCar("horizontal-upper")}}>
                             {upperCars.map((car, index) =>{
                                 if(index % 2 != 0){
@@ -87,6 +75,7 @@ function Road(){
                                 }
                             })}
                         </div>
+                        <TrafficLight location={"horizontal-down"} color={downTl}/>
                         <div className="lane-4 lane" onClick={() => {addCar("horizontal-down")}}>
                             {downCars.map((car, index) =>{
                                 if(index % 2 != 0){
@@ -107,56 +96,63 @@ function Road(){
 
             <div className="road-vertical">
                 <div className="road-left">
-                    <div className="lane-5 lane" onClick={() => {addCar("vertical-left")}}>
-                        {leftCars.map((car, index) =>{
-                            if(index % 2 != 0){
-                                return (
-                                    <Car 
-                                            key={car.id}
-                                            location={car.location}
-                                    />
-                                )
-                            }
-                        })}
+                    <div className="lanes lanes-3">
+                        <div className="lane-5 lane" onClick={() => {addCar("vertical-left")}}>
+                            {leftCars.map((car, index) =>{
+                                if(index % 2 != 0){
+                                    return (
+                                        <Car 
+                                                key={car.id}
+                                                location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
 
+                        </div>
+                        <TrafficLight location={"vertical-left"} color={leftTl}/>
+                        <div className="lane-6 lane" onClick={() => {addCar("vertical-left")}}>
+                            {leftCars.map((car, index) =>{
+                                if(index % 2 == 0){
+                                    return (
+                                        <Car 
+                                                key={car.id}
+                                                location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
                     </div>
-                    <div className="lane-6 lane" onClick={() => {addCar("vertical-left")}}>
-                        {leftCars.map((car, index) =>{
-                            if(index % 2 == 0){
-                                return (
-                                    <Car 
-                                            key={car.id}
-                                            location={car.location}
-                                    />
-                                )
-                            }
-                        })}
-                    </div>
+                    
                 </div> 
                 <div className="road-right">
-                    <div className="lane-7 lane" onClick={() => {addCar("vertical-right")}}>
-                        {rightCars.map((car, index) =>{
-                            if(index % 2 == 0){
-                                return (
-                                    <Car 
-                                            key={car.id}
-                                            location={car.location}
-                                    />
-                                )
-                            }
-                        })}
-                    </div>
-                    <div className="lane-8 lane" onClick={() => {addCar("vertical-right")}}>
-                        {rightCars.map((car, index) =>{
-                            if(index % 2 != 0){
-                                return (
-                                    <Car 
-                                            key={car.id}
-                                            location={car.location}
-                                    />
-                                )
-                            }
-                        })}
+                    <div className="lanes lanes-4">
+                        <div className="lane-7 lane" onClick={() => {addCar("vertical-right")}}>
+                            {rightCars.map((car, index) =>{
+                                if(index % 2 == 0){
+                                    return (
+                                        <Car 
+                                                key={car.id}
+                                                location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
+                        <TrafficLight location={"vertical-right"} color={rightTl}/>
+                        <div className="lane-8 lane" onClick={() => {addCar("vertical-right")}}>
+                            {rightCars.map((car, index) =>{
+                                if(index % 2 != 0){
+                                    return (
+                                        <Car 
+                                                key={car.id}
+                                                location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

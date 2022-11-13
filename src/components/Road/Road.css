@@ -76,6 +76,16 @@
     display: flex;
 }
 
+.road-vertical .lanes{
+    height: max-content;
+    display: flex;
+    position: relative;
+}
+
+.road-right{
+    align-items: flex-end;
+}
+
 .road-vertical .lane{
     width: 10rem;
     height: 17rem;
@@ -98,14 +108,3 @@
     align-self: flex-end;
 }
 
-/*Traffic Lights*/
-.traffic-light{
-    border: 1px black solid;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    height: 10em;
-    text-align: center;
-}
