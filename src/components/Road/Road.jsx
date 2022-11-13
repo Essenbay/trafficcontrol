@@ -15,10 +15,26 @@ function Road(){
             location: location
         }
         switch(location){
-            case "horizontal-upper": setUpperCars([...upperCars, newCar]); break;
-            case "horizontal-down": setDownCars([...downCars, newCar]); break;
-            case "vertical-left": setLeftCars([...leftCars, newCar]); break;
-            case "vertical-right": setRightCars([...rightCars, newCar]); break;
+            case "horizontal-upper": 
+                if(upperCars.length < 8){
+                    setUpperCars([...upperCars, newCar]); 
+                } else{console.log(`No place in ${location}`)}
+                break;
+            case "horizontal-down": 
+                if(downCars.length < 8){
+                    setDownCars([...downCars, newCar]);
+                } else{console.log(`No place in ${location}`)}
+                break;
+            case "vertical-left": 
+                if(leftCars.length < 4){
+                    setLeftCars([...leftCars, newCar]);
+                } else{console.log(`No place in ${location}`)}
+                break;
+            case "vertical-right": 
+                if(rightCars.length < 4){
+                    setRightCars([...rightCars, newCar]); break;
+                } else{console.log(`No place in ${location}`)}
+                break;
             default: console.log("Couldn't find location")
         }
         console.log(`Added car in ${location}`)
@@ -28,33 +44,120 @@ function Road(){
         <div className="road">
             <div className="road-horizontal">
                 <div className="road-upper">
-                    <div className="lane-1 lane" onClick={() => {addCar("horizontal-upper")}}>
-                        <Car location={"horizontal-upper"}/>
-                        {/* {upperCars.map((car) =>{
-                            return (
-                                <Car 
-                                    key={car.id}
-                                    car={car}
-                                />
-                            )
-                        })} */}
+                    <div className="lanes lanes-1">
+                        <div className="lane-1 lane" onClick={() => {addCar("horizontal-upper")}}>
+                           {upperCars.map((car, index) =>{
+                                if(index % 2 == 0){
+                                    return (
+                                        <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
+                        <div className="traffic-light">Traffic Light</div>
+                        <div className="lane-2 lane" onClick={() => {addCar("horizontal-upper")}}>
+                            {upperCars.map((car, index) =>{
+                                if(index % 2 != 0){
+                                    return (
+                                        <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
                     </div>
-                    <div className="lane-2 lane" onClick={() => {addCar("horizontal-upper")}}>Lane 2</div>
+                    
                 </div> 
                 <div className="road-down">
-                    <div className="lane-3 lane" onClick={() => {addCar("horizontal-down")}}>Lane 3</div>
-                    <div className="lane-4 lane" onClick={() => {addCar("horizontal-down")}}>Lane 4</div>
+                    <div className="lanes lanes-2">
+                        <div className="lane-3 lane" onClick={() => {addCar("horizontal-down")}}>
+                            {downCars.map((car, index) =>{
+                                if(index % 2 == 0){
+                                    return (
+                                        <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
+                        <div className="lane-4 lane" onClick={() => {addCar("horizontal-down")}}>
+                            {downCars.map((car, index) =>{
+                                if(index % 2 != 0){
+                                    return (
+                                        <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                        />
+                                    )
+                                }
+                            })}
+                        </div>
+                    </div>
+                    
                 </div> 
+                
             </div>
 
             <div className="road-vertical">
                 <div className="road-left">
-                    <div className="lane-5 lane" onClick={() => {addCar("vertical-left")}}>Lane 5</div>
-                    <div className="lane-6 lane" onClick={() => {addCar("vertical-left")}}>Lane 6</div>
+                    <div className="lane-5 lane" onClick={() => {addCar("vertical-left")}}>
+                        {leftCars.map((car, index) =>{
+                            if(index % 2 != 0){
+                                return (
+                                    <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                    />
+                                )
+                            }
+                        })}
+
+                    </div>
+                    <div className="lane-6 lane" onClick={() => {addCar("vertical-left")}}>
+                        {leftCars.map((car, index) =>{
+                            if(index % 2 == 0){
+                                return (
+                                    <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                    />
+                                )
+                            }
+                        })}
+                    </div>
                 </div> 
                 <div className="road-right">
-                    <div className="lane-7 lane" onClick={() => {addCar("vertical-right")}}>Lane 7</div>
-                    <div className="lane-8 lane" onClick={() => {addCar("vertical-right")}}>Lane 8</div>
+                    <div className="lane-7 lane" onClick={() => {addCar("vertical-right")}}>
+                        {rightCars.map((car, index) =>{
+                            if(index % 2 == 0){
+                                return (
+                                    <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                    />
+                                )
+                            }
+                        })}
+                    </div>
+                    <div className="lane-8 lane" onClick={() => {addCar("vertical-right")}}>
+                        {rightCars.map((car, index) =>{
+                            if(index % 2 != 0){
+                                return (
+                                    <Car 
+                                            key={car.id}
+                                            location={car.location}
+                                    />
+                                )
+                            }
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
